@@ -1,0 +1,5 @@
+go.work
+.idea
+.env-example
+go.work.sum
+.DS_Store

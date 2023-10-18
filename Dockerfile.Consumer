@@ -1,0 +1,21 @@
+# Use an official Go runtime as a parent image
+FROM golang:1.20
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the local package files to the container's workspace
+COPY . .
+
+# Build the Go application
+RUN CGO_ENABLED=0 GOOS=linux go build -o /consumer ./cmd/consumer
+
+FROM alpine:latest
+
+# Copy the built Go application from the previous stage
+COPY --from=0 /consumer /
+
+COPY --from=0 /app/migrations /migrations
+
+# Command to run the executable
+CMD ["/consumer"]

@@ -1,0 +1,40 @@
+version: '3'
+services:
+  sender:
+    build:
+      context: .
+      dockerfile: Dockerfile.Sender
+    ports:
+      - "8002:8002"
+    depends_on:
+      - rabbitmq
+      - db
+  consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.Consumer
+    ports:
+      - "8001:8001"
+    depends_on:
+      - sender
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password123
+  db:
+    image: postgres
+    volumes:
+      - data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: content-producer-manager
+
+volumes:
+  data:
