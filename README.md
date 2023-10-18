@@ -3,7 +3,7 @@ Content producer and consumer manager service
 # Description of the service:
 
 This is a service which contains two REST APIs for handling content and metadata about the content.
-The sender API will listen to port :8001 and the consumer API will listen to port :8002.
+The sender API will listen to port :8002 and the consumer API will listen to port :8001.
 The sender API will process the request and publish a rabbitmq message to the rabbitmq 'content' exchange.
 The consumer API will set up a queue, bind it to the exchange and consume the messages from the queue.To handle the
 messages, a go routine is set up in order to process the messages and then store them in the postgres database.
@@ -30,6 +30,7 @@ run `docker-compose up --build` and the service will start and listen on port :8
         } ```
     Response:
       Status Code: 200 (OK)
+    example: http://localhost:8002/api/send
 
 ## Consumer API
 
