@@ -25,6 +25,7 @@ run `docker-compose up --build` and the service will start and listen on port :8
       ```json {   
         "sender_id": 1,
         "file_type": "application/msword",
+        "file": "SGVsbG8gV29ybGQhCg==",
         "receiver_id": 3,
         "is_payable": true
         } ```
@@ -64,6 +65,7 @@ run `docker-compose up --build` and the service will start and listen on port :8
                 "is_paid": true,
                 "created_at": "2023-10-17T23:25:24.521795Z"
      }] 
+    example: http://localhost:8001/api/consumer/1
 
 Things I wished I would have added to the service:
 
